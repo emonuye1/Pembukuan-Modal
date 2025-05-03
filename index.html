@@ -1,6 +1,157 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js">
+function addItem(name, price, quantity) {
+    const newItem = {
+        id: Date.now().toString(),
+        name: name,
+        price: price,
+        quantity: quantity,
+        date: new Date().toISOString()
+    };
+
+    const inventoryRef = firebase.database().ref('inventory');
+    inventoryRef.push(newItem); // Menyimpan data barang ke Firebase
+
+    renderInventory();  // Mengupdate tampilan
+}
+
+function renderInventory() {
+    const inventoryRef = firebase.database().ref('inventory');
+    inventoryRef.on('value', function(snapshot) {
+        const data = snapshot.val();
+        const items = [];
+        for (let id in data) {
+            items.push(data[id]);
+        }
+        displayItems(items);  // Menampilkan data di tabel
+    });
+}
+
+function displayItems(items) {
+    const inventoryTable = document.getElementById('inventory-table');
+    inventoryTable.innerHTML = ''; // Mengosongkan tabel sebelum merender ulang
+
+    items.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.name}</td>
+            <td>Rp ${item.price}</td>
+            <td>${item.quantity}</td>
+            <td>Rp ${item.price * item.quantity}</td>
+            <td>${new Date(item.date).toLocaleDateString()}</td>
+        `;
+        inventoryTable.appendChild(row);
+    });
+}
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js">
+function addItem(name, price, quantity) {
+    const newItem = {
+        id: Date.now().toString(),
+        name: name,
+        price: price,
+        quantity: quantity,
+        date: new Date().toISOString()
+    };
+
+    const inventoryRef = firebase.database().ref('inventory');
+    inventoryRef.push(newItem); // Menyimpan data barang ke Firebase
+
+    renderInventory();  // Mengupdate tampilan
+}
+
+function renderInventory() {
+    const inventoryRef = firebase.database().ref('inventory');
+    inventoryRef.on('value', function(snapshot) {
+        const data = snapshot.val();
+        const items = [];
+        for (let id in data) {
+            items.push(data[id]);
+        }
+        displayItems(items);  // Menampilkan data di tabel
+    });
+}
+
+function displayItems(items) {
+    const inventoryTable = document.getElementById('inventory-table');
+    inventoryTable.innerHTML = ''; // Mengosongkan tabel sebelum merender ulang
+
+    items.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.name}</td>
+            <td>Rp ${item.price}</td>
+            <td>${item.quantity}</td>
+            <td>Rp ${item.price * item.quantity}</td>
+            <td>${new Date(item.date).toLocaleDateString()}</td>
+        `;
+        inventoryTable.appendChild(row);
+    });
+}
+</script>
+<script>
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        databaseURL: "YOUR_DATABASE_URL",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.database(app);
+
+function addItem(name, price, quantity) {
+    const newItem = {
+        id: Date.now().toString(),
+        name: name,
+        price: price,
+        quantity: quantity,
+        date: new Date().toISOString()
+    };
+
+    const inventoryRef = firebase.database().ref('inventory');
+    inventoryRef.push(newItem); // Menyimpan data barang ke Firebase
+
+    renderInventory();  // Mengupdate tampilan
+}
+
+function renderInventory() {
+    const inventoryRef = firebase.database().ref('inventory');
+    inventoryRef.on('value', function(snapshot) {
+        const data = snapshot.val();
+        const items = [];
+        for (let id in data) {
+            items.push(data[id]);
+        }
+        displayItems(items);  // Menampilkan data di tabel
+    });
+}
+
+function displayItems(items) {
+    const inventoryTable = document.getElementById('inventory-table');
+    inventoryTable.innerHTML = ''; // Mengosongkan tabel sebelum merender ulang
+
+    items.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.name}</td>
+            <td>Rp ${item.price}</td>
+            <td>${item.quantity}</td>
+            <td>Rp ${item.price * item.quantity}</td>
+            <td>${new Date(item.date).toLocaleDateString()}</td>
+        `;
+        inventoryTable.appendChild(row);
+    });
+}
+</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MODAL - Aplikasi Pembukuan</title>
@@ -796,6 +947,51 @@
             // Update date display every minute
             setInterval(updateCurrentDate, 60000);
         };
-    </script>
+    
+function addItem(name, price, quantity) {
+    const newItem = {
+        id: Date.now().toString(),
+        name: name,
+        price: price,
+        quantity: quantity,
+        date: new Date().toISOString()
+    };
+
+    const inventoryRef = firebase.database().ref('inventory');
+    inventoryRef.push(newItem); // Menyimpan data barang ke Firebase
+
+    renderInventory();  // Mengupdate tampilan
+}
+
+function renderInventory() {
+    const inventoryRef = firebase.database().ref('inventory');
+    inventoryRef.on('value', function(snapshot) {
+        const data = snapshot.val();
+        const items = [];
+        for (let id in data) {
+            items.push(data[id]);
+        }
+        displayItems(items);  // Menampilkan data di tabel
+    });
+}
+
+function displayItems(items) {
+    const inventoryTable = document.getElementById('inventory-table');
+    inventoryTable.innerHTML = ''; // Mengosongkan tabel sebelum merender ulang
+
+    items.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.name}</td>
+            <td>Rp ${item.price}</td>
+            <td>${item.quantity}</td>
+            <td>Rp ${item.price * item.quantity}</td>
+            <td>${new Date(item.date).toLocaleDateString()}</td>
+        `;
+        inventoryTable.appendChild(row);
+    });
+}
+</script>
 </body>
 </html>
